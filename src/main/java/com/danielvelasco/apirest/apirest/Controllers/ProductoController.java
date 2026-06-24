@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 //Esto es todo lo que hace un controlador, luego pasaré a ver cómo funciona con un Service aparte, en ProductoService
 
-@RestController//Hacemos la anotación para que Spring reconozca que es un controlador
+@RestController//Hacemos la anotación para indicar a Spring que es un controlador
 @RequestMapping("/productos")//Anotacion de mapeo de rutas, define la ruta base del controlador.
 @RequiredArgsConstructor // Las inyecciones con Autowired sirven pero es mejor hacer un constructor
 // para este caso existe LOMBOK una dependencia que hace la creacion de estos constructores
@@ -29,12 +29,12 @@ public class ProductoController {
     private final ProductoRepository productoRepository; //Usamos la Inyección de Dependencias por constructor con Lombok
     
 
-    @GetMapping//Para que Spring reconozca la petición en este caso GET
+    @GetMapping//Para indicar a Spring la petición en este caso GET(Obtener)
     public List<Producto> obtenerProductos(){
         return productoRepository.findAll();
     }
 
-    @GetMapping("/{id}")//Para que Spring reconozca la petición en este caso GET, para este caso solo por un id 
+    @GetMapping("/{id}")//Para indicar a Spring la petición en este caso GET, para este caso solo por un id 
     public Producto obtm(@PathVariable Long id) {
         return productoRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("No se encontró el producto con el ID: " + id));

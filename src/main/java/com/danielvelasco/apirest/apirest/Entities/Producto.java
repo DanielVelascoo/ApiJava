@@ -4,38 +4,26 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 //Se le añade la anotación Entity para indicar a Spring que es una tabla de nuestra BD
 @Entity
+//Con LOMBOK puedo eliminar demasiado código de los GETTERS Y SETTERS, solo añado las anotaciones que indican los mismos.
+@Getter
+@Setter
+//Constructores a medida
+@NoArgsConstructor//generará un constructor sin parámetros
+@AllArgsConstructor//genera un constructor con 1 parámetro para cada campo de tu clase
 public class Producto {
-    
-    
     @Id //Se la añade esta anotación para que sepa que es un ID
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Se la añade esta anotación para que se incremente automaticamente el ID
     //Creamos los atributos de esta clase Entidad, para este caso sería los campos de la tabla de nuestra BD
     private long id; //Utilizamos long por si en algun momento son demasiados ID
     private String nombre;
     private double precio;
-
-    //Y generamos los Getters y los Setters
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public double getPrecio() {
-        return precio;
-    }
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    } 
-
-    
 }
+
+//Próximo a estudiar por acá, patrones como DTOs, Builders y Records
