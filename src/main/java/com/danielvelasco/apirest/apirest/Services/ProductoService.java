@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.danielvelasco.apirest.apirest.Dto.ProductoRequestDTO;
+import com.danielvelasco.apirest.apirest.Dto.ProductoResponseDTO;
 import com.danielvelasco.apirest.apirest.Entities.Producto;
 import com.danielvelasco.apirest.apirest.Repositories.ProductoRepository;
 
@@ -24,8 +26,25 @@ public class ProductoService {
         .orElseThrow(() -> new RuntimeException("No se encontró el producto"));
     }
 
-    public Producto crearProducto(Producto producto) {
-        return productoRepository.save(producto);
+    public ProductoResponseDTO crear(ProductoRequestDTO producto) {
+        //CReaciónm de la Entidad
+        Producto productonuevo = new Producto();
+
+        //Pasar los datos del DTO a la entidad
+        productonuevo.setNombre(producto.getNombre());
+        productonuevo.setDescripcion(producto.getDescripcion());
+        productonuevo.setPrecio(producto.getPrecio());
+        productonuevo.setStock(producto.getStock());
+
+        //Guardar
+        Producto productoGuardado = productoRepository.save(productonuevo);
+
+        //Creación de la respuesta
+        ProductoResponseDTO respuesta = new ProductoResponseDTO();
+        respuesta.setId(productoGuardado.getId());
+        respuesta.setNombre(productoGuardado.getNombre());
+        
+        return respuesta;
     }
 
     public Producto updateProducto(Long id, Producto detalleProducto) {

@@ -1,5 +1,10 @@
 package com.danielvelasco.apirest.apirest.Entities;
 
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +28,12 @@ public class Producto {
     //Creamos los atributos de esta clase Entidad, para este caso sería los campos de la tabla de nuestra BD
     private Long id; //Utilizamos long por si en algun momento son demasiados ID
     private String nombre;
-    private double precio;
+    private String descripcion;
+    private Double precio;
+    private int stock;
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime fechaCreacion;
 }
 
 //Próximo a estudiar por acá, patrones como DTOs, Builders y Records

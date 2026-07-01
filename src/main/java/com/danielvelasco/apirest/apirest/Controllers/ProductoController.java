@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.danielvelasco.apirest.apirest.Dto.ProductoRequestDTO;
+import com.danielvelasco.apirest.apirest.Dto.ProductoResponseDTO;
 import com.danielvelasco.apirest.apirest.Entities.Producto;
 import com.danielvelasco.apirest.apirest.Services.ProductoService;
 
@@ -39,8 +41,8 @@ public class ProductoController {
     }
 
     @PostMapping
-    public Producto crearProducto(@RequestBody Producto producto) {
-        return productoService.crearProducto(producto);
+    public ProductoResponseDTO crearProducto(@RequestBody ProductoRequestDTO producto) {
+        return productoService.crear(producto);
     }
 
     @PutMapping("/{id}")
@@ -57,3 +59,6 @@ public class ProductoController {
     }
 
 }
+
+
+// an angel sent from heaven just for me
