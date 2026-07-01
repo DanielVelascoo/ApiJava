@@ -21,7 +21,7 @@ public class Producto {
     @Id //Se la añade esta anotación para que sepa que es un ID
     @GeneratedValue(strategy = GenerationType.IDENTITY) //Se la añade esta anotación para que se incremente automaticamente el ID
     //Creamos los atributos de esta clase Entidad, para este caso sería los campos de la tabla de nuestra BD
-    private long id; //Utilizamos long por si en algun momento son demasiados ID
+    private Long id; //Utilizamos long por si en algun momento son demasiados ID
     private String nombre;
     private double precio;
 }
