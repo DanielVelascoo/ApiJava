@@ -1,6 +1,8 @@
 package com.danielvelasco.apirest.apirest.Services;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 import org.springframework.stereotype.Service;
 
@@ -17,17 +19,44 @@ public class ProductoService {
 
     private final ProductoRepository productoRepository;
 
-    public List<Producto> obtenerProductos() {
-        return productoRepository.findAll();
+    
+    public List<ProductoResponseDTO> obtener(){
+        //Creación de la Lista en productos
+        List<Producto> productos = productoRepository.findAll();
+        //Creación del Array todo queda en la variable de respeusta
+        List<ProductoResponseDTO> respuesta = new ArrayList<>();
+        //Recorremos o iteramos los objetos para llenar el Array
+        for(Producto producto : productos){
+
+        ProductoResponseDTO datos = new ProductoResponseDTO();
+        //Pasamos los datos al dto 
+        datos.setId(producto.getId());
+        datos.setNombre(producto.getNombre());
+        //Adccionamos los datos a respuesta
+        respuesta.add(datos);
+    }
+    //Retornamos la respuesta que este caso es el array con los objetos
+    return respuesta;
     }
 
-    public Producto obtenerProducto(Long id) {
-        return productoRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("No se encontró el producto"));
+    public ProductoResponseDTO obtenerProductoById(Long id) {
+        //Instanciamos el prodcuto por ID y se almacena en la variable producto
+        Producto producto = productoRepository.findById(id)
+            //Creamos el mensaje en caso de que no exista el producto
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        //Se hace el Objeto del dto
+        ProductoResponseDTO dto = new ProductoResponseDTO();
+        //Se le instancian los datos 
+        dto.setId(producto.getId());
+        dto.setNombre(producto.getNombre());
+        //Se retorna el dto para mostrar los datos
+        return dto;
+
     }
 
     public ProductoResponseDTO crear(ProductoRequestDTO producto) {
-        //CReaciónm de la Entidad
+        //CReación de la Entidad
         Producto productonuevo = new Producto();
 
         //Pasar los datos del DTO a la entidad
@@ -47,22 +76,22 @@ public class ProductoService {
         return respuesta;
     }
 
-    public Producto updateProducto(Long id, Producto detalleProducto) {
+    // public Producto updateProducto(Long id, Producto detalleProducto) {
 
-        Producto producto = obtenerProducto(id);
+    //     Producto producto = obtenerProductoById(id);
 
-        producto.setNombre(detalleProducto.getNombre());
-        producto.setPrecio(detalleProducto.getPrecio());
+    //     producto.setNombre(detalleProducto.getNombre());
+    //     producto.setPrecio(detalleProducto.getPrecio());
 
-        return productoRepository.save(producto);
-    }
+    //     return productoRepository.save(producto);
+    // }
 
-    public String borrarProducto(Long id) {
+    // public String borrarProducto(Long id) {
 
-        Producto producto = obtenerProducto(id);
+    //     Producto producto = obtenerProductoById(id);
 
-        productoRepository.delete(producto);
+    //     productoRepository.delete(producto);
 
-        return "Producto eliminado correctamente";
-    }
+    //     return "Producto eliminado correctamente";
+    // }
 }

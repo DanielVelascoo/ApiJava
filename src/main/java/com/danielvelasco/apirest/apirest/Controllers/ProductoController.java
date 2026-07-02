@@ -31,13 +31,13 @@ public class ProductoController {
     private final ProductoService productoService;
 
     @GetMapping
-    public List<Producto> obtenerProductos() {
-        return productoService.obtenerProductos();
+    public List<ProductoResponseDTO> obtenerProductos() {
+        return productoService.obtener();
     }
 
     @GetMapping("/{id}")
-    public Producto obtenerProducto(@PathVariable Long id) {
-        return productoService.obtenerProducto(id);
+    public ProductoResponseDTO obtenerProducto(@PathVariable Long id) {
+        return productoService.obtenerProductoById(id);
     }
 
     @PostMapping
@@ -45,18 +45,18 @@ public class ProductoController {
         return productoService.crear(producto);
     }
 
-    @PutMapping("/{id}")
-    public Producto actualizarProducto(
-            @PathVariable Long id,
-            @RequestBody Producto detalleProducto) {
+    // @PutMapping("/{id}")
+    // public Producto actualizarProducto(
+    //         @PathVariable Long id,
+    //         @RequestBody Producto detalleProducto) {
 
-        return productoService.updateProducto(id, detalleProducto);
-    }
+    //     return productoService.updateProducto(id, detalleProducto);
+    // }
 
-    @DeleteMapping("/{id}")
-    public String borrarProducto(@PathVariable Long id) {
-        return productoService.borrarProducto(id);
-    }
+    // @DeleteMapping("/{id}")
+    // public String borrarProducto(@PathVariable Long id) {
+    //     return productoService.borrarProducto(id);
+    // }
 
 }
 
