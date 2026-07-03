@@ -53,10 +53,10 @@ public class ProductoController {
         return productoService.update(id, detalleProducto);
     }
 
-    // @DeleteMapping("/{id}")
-    // public String borrarProducto(@PathVariable Long id) {
-    //     return productoService.borrarProducto(id);
-    // }
+    @DeleteMapping("/{id}")
+    public String borrarProducto(@PathVariable Long id) {
+        return productoService.borrarProducto(id);
+    }
 
 }
 

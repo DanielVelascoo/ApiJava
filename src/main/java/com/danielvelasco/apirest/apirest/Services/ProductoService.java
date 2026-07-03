@@ -94,12 +94,14 @@ public class ProductoService {
         return dto;
     }
 
-    // public String borrarProducto(Long id) {
+    public String borrarProducto(Long id) {
 
-    //     Producto producto = obtenerProductoById(id);
+        Producto producto = productoRepository.findById(id)
+            //Creamos el mensaje en caso de que no exista el producto
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
-    //     productoRepository.delete(producto);
+        productoRepository.delete(producto);
 
-    //     return "Producto eliminado correctamente";
-    // }
+        return "Producto eliminado correctamente";
+    }
 }
