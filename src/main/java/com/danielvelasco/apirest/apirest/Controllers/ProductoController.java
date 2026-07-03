@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.danielvelasco.apirest.apirest.Dto.ProductoRequestDTO;
 import com.danielvelasco.apirest.apirest.Dto.ProductoResponseDTO;
-import com.danielvelasco.apirest.apirest.Entities.Producto;
 import com.danielvelasco.apirest.apirest.Services.ProductoService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,8 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RestController // Hacemos la anotación para indicar a Spring que es un controlador
 @RequestMapping("/productos") // Anotacion de mapeo de rutas, define la ruta base del controlador.
 @RequiredArgsConstructor // Las inyecciones con Autowired sirven pero es mejor hacer un constructor
-// para este caso existe LOMBOK una dependencia que hace la creacion de estos
-// constructores
+// para este caso existe LOMBOK una dependencia que hace la creacion de estos constructores
 public class ProductoController {
 
     // Inyectamos el Service
