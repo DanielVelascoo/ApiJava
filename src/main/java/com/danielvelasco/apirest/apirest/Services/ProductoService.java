@@ -76,15 +76,23 @@ public class ProductoService {
         return respuesta;
     }
 
-    // public Producto updateProducto(Long id, Producto detalleProducto) {
+    public ProductoResponseDTO update(Long id, ProductoRequestDTO detalleProducto) {
 
-    //     Producto producto = obtenerProductoById(id);
-
-    //     producto.setNombre(detalleProducto.getNombre());
-    //     producto.setPrecio(detalleProducto.getPrecio());
-
-    //     return productoRepository.save(producto);
-    // }
+        Producto producto = productoRepository.findById(id)
+            //Creamos el mensaje en caso de que no exista el producto
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+        //Seteamos los datos enviados para actualizar
+        producto.setNombre(detalleProducto.getNombre());
+        producto.setPrecio(detalleProducto.getPrecio());
+        //Guardamos los datos
+        productoRepository.save(producto);
+        //Llenamos el dto
+        ProductoResponseDTO dto = new ProductoResponseDTO();
+        dto.setId(producto.getId());
+        dto.setNombre(producto.getNombre());
+        //Retornamos la respuesta
+        return dto;
+    }
 
     // public String borrarProducto(Long id) {
 

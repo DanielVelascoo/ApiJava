@@ -45,13 +45,13 @@ public class ProductoController {
         return productoService.crear(producto);
     }
 
-    // @PutMapping("/{id}")
-    // public Producto actualizarProducto(
-    //         @PathVariable Long id,
-    //         @RequestBody Producto detalleProducto) {
+    @PutMapping("/{id}")
+    public ProductoResponseDTO actualizarProducto(
+            @PathVariable Long id,
+            @RequestBody ProductoRequestDTO detalleProducto) {
 
-    //     return productoService.updateProducto(id, detalleProducto);
-    // }
+        return productoService.update(id, detalleProducto);
+    }
 
     // @DeleteMapping("/{id}")
     // public String borrarProducto(@PathVariable Long id) {
