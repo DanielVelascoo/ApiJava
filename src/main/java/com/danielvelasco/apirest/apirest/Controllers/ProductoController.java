@@ -2,6 +2,7 @@ package com.danielvelasco.apirest.apirest.Controllers;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -39,7 +40,7 @@ public class ProductoController {
     }
 
     @PostMapping
-    public ProductoResponseDTO crearProducto(@RequestBody ProductoRequestDTO producto) {
+    public ProductoResponseDTO crearProducto(@Valid @RequestBody ProductoRequestDTO producto) {
         return productoService.crear(producto);
     }
 
