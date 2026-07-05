@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import com.danielvelasco.apirest.apirest.Exceptions.ProductoNoEncontradoException;
 import org.springframework.stereotype.Service;
 
 import com.danielvelasco.apirest.apirest.Dto.ProductoRequestDTO;
@@ -43,7 +44,7 @@ public class ProductoService {
         //Instanciamos el prodcuto por ID y se almacena en la variable producto
         Producto producto = productoRepository.findById(id)
             //Creamos el mensaje en caso de que no exista el producto
-            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+            .orElseThrow(() -> new ProductoNoEncontradoException("Producto no encontrado"));
 
         //Se hace el Objeto del dto
         ProductoResponseDTO dto = new ProductoResponseDTO();
