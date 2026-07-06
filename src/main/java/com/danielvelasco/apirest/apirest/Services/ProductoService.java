@@ -48,7 +48,7 @@ public class ProductoService {
 
         //Se hace el Objeto del dto
         ProductoResponseDTO dto = new ProductoResponseDTO();
-        //Se le instancian los datos 
+        //Se le instancian datos
         dto.setId(producto.getId());
         dto.setNombre(producto.getNombre());
         //Se retorna el dto para mostrar los datos
@@ -81,7 +81,7 @@ public class ProductoService {
 
         Producto producto = productoRepository.findById(id)
             //Creamos el mensaje en caso de que no exista el producto
-            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+            .orElseThrow(() -> new ProductoNoEncontradoException("Producto no encontrado"));
         //Seteamos los datos enviados para actualizar
         producto.setNombre(detalleProducto.getNombre());
         producto.setPrecio(detalleProducto.getPrecio());
@@ -99,10 +99,10 @@ public class ProductoService {
 
         Producto producto = productoRepository.findById(id)
             //Creamos el mensaje en caso de que no exista el producto
-            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
-
+            .orElseThrow(() -> new ProductoNoEncontradoException("Producto no encontrado"));
+        //Eliminamos el prdocuto y pasamos el producto erncontrado
         productoRepository.delete(producto);
-
+        //Retornamos el mensaje de exito
         return "Producto eliminado correctamente";
     }
 }

@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-@ControllerAdvice
+@ControllerAdvice//Primero decimos que es un Excepcion
+// Evita repetir bloques try-catch en todos los Controllers y centraliza el manejo de excepciones
 public class GlobalExceptionHandler {
+    //La anotacion sirve para decir que si el método existe, lo ejecute.
     @ExceptionHandler(ProductoNoEncontradoException.class)
     public ResponseEntity<String> manejarProductoNoEncontrado(ProductoNoEncontradoException ex){
         return ResponseEntity
